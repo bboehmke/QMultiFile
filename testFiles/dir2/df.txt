@@ -1,0 +1,10 @@
+Dateisystem       Größe Benutzt Verf. Verw% Eingehängt auf
+/dev/sda5           31G     16G   15G   52% /
+dev                3,9G       0  3,9G    0% /dev
+run                3,9G    612K  3,9G    1% /run
+tmpfs              3,9G     36M  3,9G    1% /dev/shm
+tmpfs              3,9G       0  3,9G    0% /sys/fs/cgroup
+tmpfs              3,9G     96K  3,9G    1% /tmp
+/dev/sdb2          826G    272G  513G   35% /home
+tmpfs              796M     28K  796M    1% /run/user/1000
+sonne:/data/media  5,5T    3,2T  2,0T   62% /net/sonne/data/media
