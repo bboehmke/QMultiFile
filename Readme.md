@@ -15,7 +15,7 @@
 
 ## ToDo
 * Support writing of files
-* Support tag and tar.gz archives
+* Support tar and tar.gz archives
 
 ## How to Use
 
