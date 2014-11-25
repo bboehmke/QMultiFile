@@ -67,7 +67,7 @@ void QMultiFile::close() {
 
 
 bool QMultiFile::atEnd() const {
-	return fileHandle->atEnd();
+	return bytesAvailable() <= 0;
 }
 
 qint64 QMultiFile::bytesAvailable() const {
