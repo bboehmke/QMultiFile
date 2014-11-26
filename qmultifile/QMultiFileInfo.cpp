@@ -44,19 +44,15 @@ QMultiFileInfo::QMultiFileInfo(QString file) : fileExist(false) {
 
 	// search in the path
 	while ((pos = rx.indexIn(file, pos)) != -1) {
-
 		// build the path
 		path_wildcardArchive = handledPath + rx.cap(1) + "." + rx.cap(3);
 
 		// check if there is an archive
 		if (checkIfArchive(path_wildcardArchive)) {
-
 			// set extension
 			archiveExtension = rx.cap(3);
-
 			// set the file path
 			path_file = file.mid(pos + rx.matchedLength());
-
 			// build the wildcard paths
 			QStringList pathList = getArchivePath(path_wildcardArchive);
 
