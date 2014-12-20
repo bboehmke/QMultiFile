@@ -1,4 +1,5 @@
 include($$PWD/fileTypes/fileTypes.pri)
+include($$PWD/util/util.pri)
 
 SOURCES += $$PWD/QMultiFileInfo.cpp \
 		   $$PWD/QMultiFile.cpp \

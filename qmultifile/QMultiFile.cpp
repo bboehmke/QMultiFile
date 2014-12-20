@@ -29,6 +29,7 @@
 
 #include "fileTypes/QZipFileType.h"
 #include "fileTypes/QPlainFileType.h"
+#include "fileTypes/QTarFileType.h"
 
 // prepare the factory
 QSharedPointer<QFileFactory> QMultiFile::fileFactory =
@@ -112,5 +113,6 @@ void QMultiFile::initFileTypeFactory() {
 		// register the files
 		QMultiFile::fileFactory->registerFile<QZipFileType>();
 		QMultiFile::fileFactory->registerFile<QPlainFileType>();
+		QMultiFile::fileFactory->registerFile<QTarFileType>();
 	}
 }
