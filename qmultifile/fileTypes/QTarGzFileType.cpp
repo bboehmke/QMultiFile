@@ -1,5 +1,5 @@
 /**
- * @file QTarFileType.cpp
+ * @file QTarGzFileType.cpp
  *
  * This file is part of the QMultiFile Library
  *
@@ -20,46 +20,49 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
  
-#include "QTarFileType.h"
+#include "QTarGzFileType.h"
 
 #include <QFileInfo>
+
+#include <quazip/quagzipfile.h>
 
 #include "../util/QTar.h"
 #include "../util/QTarFile.h"
 
-QTarFileType::QTarFileType(QMultiFileInfo& fileInfo) :
-	QFileType(QStringList() << "tar", fileInfo), file(NULL) {
+QTarGzFileType::QTarGzFileType(QMultiFileInfo& fileInfo) :
+	QFileType(QStringList() << "tar.gz" << "tgz", fileInfo), file(NULL) {
 }
 
-QTarFileType::~QTarFileType() {
+QTarGzFileType::~QTarGzFileType() {
 	delete file;
 }
 
-bool QTarFileType::exist() const {
+bool QTarGzFileType::exist() const {
 	// get informations about the archive
 	QFileInfo archInfo(fileInfo.archivePath());
 
 	// if the archive exit
 	if (archInfo.isFile()) {
 		// open the archive
-		QTar tar(fileInfo.archivePath());
+		QTar tar(QSharedPointer<QIODevice>(new QuaGzipFile(fileInfo.archivePath())));
 
 		// try to open the file
 		if (tar.open(QTar::mdUntar)) {
 			// if the file is in the archive -> it exist
 			return tar.getFileNameList().contains(fileInfo.inArchivePath());
 		}
+
 	}
 	return false;
 }
-bool QTarFileType::open(QIODevice::OpenMode mode) {
+bool QTarGzFileType::open(QIODevice::OpenMode mode) {
 	// check if the file exist
 	if (!exist()) {
 		return false;
 	}
 
 	// create the file object
-	file = new QTarFile(fileInfo.archivePath(), fileInfo.inArchivePath());
+	file = new QTarFile(new QuaGzipFile(fileInfo.archivePath()), fileInfo.inArchivePath());
 
 	// set the last open mode
 	openMode = mode;
@@ -67,27 +70,28 @@ bool QTarFileType::open(QIODevice::OpenMode mode) {
 	// open the file
 	return file->open(mode);
 }
-void QTarFileType::close() {
+void QTarGzFileType::close() {
 	if (!file) {
 		file->close();
 		delete file;
 	}
 }
-bool QTarFileType::atEnd() const {
+bool QTarGzFileType::atEnd() const {
 	return pos() >= size();
 }
-qint64 QTarFileType::bytesAvailable() const {
+qint64 QTarGzFileType::bytesAvailable() const {
 	return file->bytesAvailable();
 }
 
-bool QTarFileType::seek(qint64 position) {
+bool QTarGzFileType::seek(qint64 position) {
 	// check if file was opened
 	if (!file) {
 		return false;
 	}
+
 	return file->seek(position);
 }
-qint64 QTarFileType::size() const {
+qint64 QTarGzFileType::size() const {
 	// check if file was opened
 	if (!file) {
 		return -1;
@@ -95,7 +99,7 @@ qint64 QTarFileType::size() const {
 	return dynamic_cast<QTarFile*>(file)->size();
 }
 
-qint64 QTarFileType::pos() const {
+qint64 QTarGzFileType::pos() const {
 	// check if file was opened
 	if (!file) {
 		return -1;
@@ -103,7 +107,7 @@ qint64 QTarFileType::pos() const {
 	return file->pos();
 }
 
-qint64 QTarFileType::read(char* data, qint64 maxSize) {
+qint64 QTarGzFileType::read(char* data, qint64 maxSize) {
 	// check if file was opened
 	if (!file) {
 		return -1;
@@ -111,7 +115,7 @@ qint64 QTarFileType::read(char* data, qint64 maxSize) {
 	return file->read(data, maxSize);
 }
 
-qint64 QTarFileType::write(const char* /*data*/, qint64 /*maxSize*/) {
+qint64 QTarGzFileType::write(const char* /*data*/, qint64 /*maxSize*/) {
 	// check if file was opened
 	if (!file) {
 		return -1;

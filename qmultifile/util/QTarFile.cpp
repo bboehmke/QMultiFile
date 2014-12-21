@@ -55,12 +55,13 @@ bool QTarFile::open(OpenMode mode) {
 				offset = info.offset;
 				fileSize = info.fileSize;
 
-				file->close();
 				QIODevice::open(QIODevice::ReadOnly);
 				if (!file->open(QIODevice::ReadOnly)) {
 					return false;
 				}
-				return seek(0);
+				// skip unneeded bytes
+				file->read(offset);
+				return true;
 			}
 		}
 		tar.close();
@@ -96,7 +97,6 @@ bool QTarFile::seek(qint64 position) {
 		if (position > fileSize) {
 			position = fileSize;
 		}
-		QIODevice::seek(position);
 
 		// if sequential device there is no seek and it must be done manually
 		if (file->isSequential()) {
@@ -106,14 +106,21 @@ bool QTarFile::seek(qint64 position) {
 				if (!file->open(QIODevice::ReadOnly)) {
 					return false;
 				}
+				// skip unneeded bytes
+				file->read(offset + position);
+
+			} else {
+				// skip unneeded bytes
+				file->read(position - pos());
 			}
 
-			// skip unneeded bytes
-			file->read(position - pos());
+			QIODevice::seek(position);
 			return true;
 
 		} else {
-			return file->seek(offset + position);
+			QIODevice::seek(position);
+			file->seek(offset + position);
+			return true;
 		}
 	} else {
 		return true;
@@ -135,7 +142,6 @@ qint64 QTarFile::readData(char* data, qint64 maxSize) {
 		if (size > bytesAvailable()) {
 			size = bytesAvailable();
 		}
-
 		return file->read(data, size);
 	} else {
 		return -1;

@@ -77,10 +77,10 @@ QList<QTar::FileInfo> QTar::getFileInfoList() const {
 	QList<FileInfo> infoList;
 	quint64 offset = 0;
 
+	// read the header
+	QByteArray header = file->read(512);
 	// find all files
-	while (!file->atEnd()) {
-		// read the header
-		QByteArray header = file->read(512);
+	while (!header.isEmpty()) {
 
 		// break if the end of the tar is reached
 		if (header.count('\0') == 512) {
@@ -113,6 +113,8 @@ QList<QTar::FileInfo> QTar::getFileInfoList() const {
 			offset += 512;
 		}
 
+		// read next header
+		header = file->read(512);
 	}
 
 	// close the file

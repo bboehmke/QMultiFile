@@ -24,6 +24,7 @@ int main() {
 	files << "testFiles/dir2/df.txt";
 	files << "testFiles/test.zip/dir2/df.txt";
 	files << "testFiles/test.tar/dir2/df.txt";
+	files << "testFiles/test.tar.gz/dir2/df.txt";
 	files << "testFiles/tst_[1-2].zip/dir2/df.txt";
 	files << "testFiles/tst_[1-20].zip/dir2/df.txt";
 	files << "testFiles/test.ext/test.zip/dir2/df.txt";
@@ -63,11 +64,11 @@ int main() {
 		qDebug() << " bytesAvailable() -> " << file.bytesAvailable();
 
 		qDebug() << "----------------------------------------";
-		qDebug() << " seek()           ->" << file.seek(32);
-		qDebug() << " read()           ->" << file.read(10);
+		qDebug() << " seek(32)         ->" << file.seek(32);
+		qDebug() << " read(10)         ->" << file.read(10);
 
-		qDebug() << " seek()           ->" << file.seek(32);
-		qDebug() << " read()           ->" << file.read(10);
+		qDebug() << " seek(32)         ->" << file.seek(32);
+		qDebug() << " read(10)         ->" << file.read(10);
 		qDebug() << "----------------------------------------";
 
 		qDebug() << " pos()            -> " << file.pos();
