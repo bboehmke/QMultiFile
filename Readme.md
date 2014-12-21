@@ -1,20 +1,19 @@
 # QMultiFile
 
+## Features
+
+* Open files in archives as normal files
+* Actual supported Archives:
+    * ZIP
+    * TAR
+    * TAR.GZ
+* Easy to extend for more archive types
+* Support for wildcard in archive path
+
 ## Requirements
 
 * Qt 4.x
 * [QuaZIP](http://quazip.sourceforge.net/) 0.6.2+  
-
-
-## Features
-
-* Open files in archives as normal files
-* Easy to extend for more archive types
-* Support for wildcard in archive path
-
-
-## ToDo
-* Support writing of files
 
 ## How to Use
 
@@ -24,3 +23,7 @@ Possible file path:
 
 * test/ex.zip/aa/bb.txt (open the file "aa/bb.txt" in the archive "test/ex.zip")
 * test/aa/bb.txt (open the file "test/aa/bb.txt" like QFile)
+* test/ex[1-2].zip/aa/bb.txt (open the file "aa/bb.txt" in the archive "test/ex1.zip" or "test/ex2.zip")
+
+## ToDo
+* Support writing of files
