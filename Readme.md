@@ -7,6 +7,7 @@
     * ZIP
     * TAR
     * TAR.GZ
+* Support for archive extension alias names
 * Easy to extend for more archive types
 * Support for wildcard in archive path
 

@@ -111,3 +111,10 @@ void QMultiFile::initFileTypeFactory() {
 		QMultiFile::fileFactory->registerFile<QTarGzFileType>();
 	}
 }
+
+void QMultiFile::addArchiveAlias(QString archiveExt, QString alias) {
+	// init the factory
+	QMultiFile::initFileTypeFactory();
+
+	QMultiFile::fileFactory->addArchiveAlias(archiveExt, alias);
+}

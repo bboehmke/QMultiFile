@@ -92,11 +92,23 @@ class QFileFactory {
 		 */
 		QFileType* create(QMultiFileInfo& fileInfo);
 
+		/**
+		 * @brief Add an alias for an archive extension
+		 * @param archiveExt Normal extension of the archive
+		 * @param alias Alias of the extension
+		 */
+		void addArchiveAlias(QString archiveExt, QString alias);
+
 	private:
 		/**
 		 * @brief List with all registered files
 		 */
 		QMap<QString, QSharedPointer<QFileCreator> > fileList;
+
+		/**
+		 * @brief Archive alias list
+		 */
+		QMap<QString, QString> aliasList;
 };
 
 

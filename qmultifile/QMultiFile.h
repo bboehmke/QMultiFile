@@ -95,6 +95,13 @@ class QMultiFile : public QIODevice {
 		 */
 		static QString getVersionInfo();
 
+		/**
+		 * @brief Add an alias for an archive extension
+		 * @param archiveExt Normal extension of the archive
+		 * @param alias Alias of the extension
+		 */
+		static void addArchiveAlias(QString archiveExt, QString alias);
+
 	protected:
 		/**
 		 * @brief Reads data from the IO object

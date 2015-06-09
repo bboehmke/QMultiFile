@@ -18,10 +18,17 @@
 #include "fileTypes/QPlainFileType.h"
 
 QFileType* QFileFactory::create(QMultiFileInfo& fileInfo) {
+    // get archive extension
+    QString extension = fileInfo.getArchiveExtension();
+
+    // if the extension is on the alias list replace it
+    if (aliasList.contains(extension)) {
+        extension = aliasList[extension];
+    }
 
 	// search for the name of the extension
 	QMap<QString, QSharedPointer<QFileCreator> >::iterator it
-			= fileList.find(fileInfo.getArchiveExtension());
+			= fileList.find(extension);
 
 	// check if extension was found
 	if (it == fileList.end()) {
@@ -30,4 +37,8 @@ QFileType* QFileFactory::create(QMultiFileInfo& fileInfo) {
 
 	// create the instance of the file class
 	return it.value()->create(fileInfo);
+}
+
+void QFileFactory::addArchiveAlias(QString archiveExt, QString alias) {
+    aliasList[alias] = archiveExt;
 }

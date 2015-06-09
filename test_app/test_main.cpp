@@ -26,16 +26,18 @@ int main() {
 	qDebug() << "------------------------------";
 	qDebug() << QMultiFile::getVersionInfo();
 	qDebug() << "------------------------------";
+	QMultiFile::addArchiveAlias("zip", "zippy");
 
 	QStringList files;
 
-	files << "testFiles/dir2/df.txt";
+	//files << "testFiles/dir2/df.txt";
 	files << "testFiles/test.zip/dir2/df.txt";
-	files << "testFiles/test.tar/dir2/df.txt";
+	files << "testFiles/test.zippy/dir2/df.txt";
+	/*files << "testFiles/test.tar/dir2/df.txt";
 	files << "testFiles/test.tar.gz/dir2/df.txt";
 	files << "testFiles/tst_[1-2].zip/dir2/df.txt";
 	files << "testFiles/tst_[1-20].zip/dir2/df.txt";
-	files << "testFiles/test.ext/test.zip/dir2/df.txt";
+	files << "testFiles/test.ext/test.zip/dir2/df.txt";*/
 
 	QStringListIterator fileIt(files);
 
