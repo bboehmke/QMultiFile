@@ -53,8 +53,15 @@ QMultiFileInfo::QMultiFileInfo(QString file) : fileExist(false) {
 			if (pathList.isEmpty()) {
 				path_archive = path_wildcardArchive;
 
-				// give this file info to the multifile
+				// check if the file exist
 				fileExist = QMultiFile(*this).exist();
+
+				// if the file not exist try to remove dummy "."
+				while (fileExist == false && archiveExtension.contains(".")) {
+					// remove content before dummy "."
+					archiveExtension = archiveExtension.mid(archiveExtension.indexOf(".")+1);
+					fileExist = QMultiFile(*this).exist();
+				}
 
 			} else {
 				// build the iterator

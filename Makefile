@@ -11,7 +11,7 @@ $(DEBUG_DIR):
 	mkdir -p $@
 	
 main_debug:
-	cd $(DEBUG_DIR); qmake-qt4 CONFIG+=debug ../../ ; make
+	cd $(DEBUG_DIR); qmake-qt4 CONFIG+=debug BUILD_TEST_APP=1 ../../ ; make
 	
 	
 release: $(RELEASE_DIR) main_release
@@ -20,7 +20,7 @@ $(RELEASE_DIR):
 	mkdir -p $@
 	
 main_release:
-	cd $(RELEASE_DIR); qmake-qt4 CONFIG+=debug ../../ ; make
+	cd $(RELEASE_DIR); qmake-qt4 CONFIG+=debug BUILD_TEST_APP=1 ../../ ; make
 	
 
 $(BUILD_DIR):

@@ -32,6 +32,7 @@ int main() {
 
 	files << "testFiles/dir2/df.txt";
 	files << "testFiles/test.zip/dir2/df.txt";
+	files << "testFiles/test.bla.zip/dir2/df.txt";
 	files << "testFiles/test.zippy/dir2/df.txt";
 	files << "testFiles/test.tar/dir2/df.txt";
 	files << "testFiles/test.tar.gz/dir2/df.txt";

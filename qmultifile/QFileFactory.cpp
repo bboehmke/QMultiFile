@@ -26,17 +26,13 @@ QFileType* QFileFactory::create(QMultiFileInfo& fileInfo) {
         extension = aliasList[extension];
     }
 
-	// search for the name of the extension
-	QMap<QString, QSharedPointer<QFileCreator> >::iterator it
-			= fileList.find(extension);
+	// check if extension exist
+    if (fileList.contains(extension)) {
+    	return fileList[extension]->create(fileInfo);
+    }
 
-	// check if extension was found
-	if (it == fileList.end()) {
-		return new QPlainFileType(fileInfo);
-	}
-
-	// create the instance of the file class
-	return it.value()->create(fileInfo);
+	// if not found try a plain file
+	return new QPlainFileType(fileInfo);
 }
 
 void QFileFactory::addArchiveAlias(QString archiveExt, QString alias) {
