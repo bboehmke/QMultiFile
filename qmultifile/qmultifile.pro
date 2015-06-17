@@ -1,7 +1,8 @@
 TEMPLATE = lib
 
 TARGET  = QMultiFile
-VERSION = 0.3.0
+# no version number on windows
+!win32:VERSION = 0.4.1
 
 win32 {
 	# Path to zlib and quazip
