@@ -20,9 +20,9 @@ namespace CFG {
  * @brief Version of this library
  * 1. Byte major  Version -> 0
  * 2. Byte update Version -> 4
- * 3. Byte minor  Version -> 2
+ * 3. Byte minor  Version -> 3
  */
-const quint32 VERSION = 0x000402;
+const quint32 VERSION = 0x000403;
 
 }
 

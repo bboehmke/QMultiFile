@@ -57,7 +57,7 @@ QMultiFileInfo::QMultiFileInfo(QString file) : fileExist(false) {
 				fileExist = QMultiFile(*this).exist();
 
 				// if the file not exist try to remove dummy "."
-				while (fileExist == false && archiveExtension.contains(".")) {
+				while (!fileExist && archiveExtension.contains(".")) {
 					// remove content before dummy "."
 					archiveExtension = archiveExtension.mid(archiveExtension.indexOf(".")+1);
 					fileExist = QMultiFile(*this).exist();
@@ -126,7 +126,12 @@ QString QMultiFileInfo::inArchivePath() const {
 
 QString QMultiFileInfo::path() const {
 	QString path = filePath();
-	return path.left(path.lastIndexOf("/"));
+	// if path not exist return empty string
+	if (!path.contains("/")) {
+		return "";
+	} else {
+		return path.left(path.lastIndexOf("/"));
+	}
 }
 
 QString QMultiFileInfo::wildcardFilePath() const {
@@ -138,7 +143,12 @@ QString QMultiFileInfo::wildcardFilePath() const {
 }
 QString QMultiFileInfo::wildcardPath() const {
 	QString path = wildcardFilePath();
-	return path.left(path.lastIndexOf("/"));
+	// if path not exist return empty string
+	if (!path.contains("/")) {
+		return "";
+	} else {
+		return path.left(path.lastIndexOf("/"));
+	}
 }
 QString QMultiFileInfo::wildcardArchivePath() const {
 	return path_wildcardArchive;

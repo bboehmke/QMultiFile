@@ -124,11 +124,19 @@ class QMultiFileInfo {
 		 */
 		QString archiveExtension;
 
+		/**
+		 * @brief true if the file exist
+		 */
 		bool fileExist;
 
-
+		/**
+		 * @brief Check if the file is in an archive
+		 */
 		bool checkIfArchive(QString path);
 
+		/**
+		 * @brief Get all archives of the given path (handle wildcards)
+		 */
 		QStringList getArchivePath(QString path);
 };
 
