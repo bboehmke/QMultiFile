@@ -108,6 +108,23 @@ QString QMultiFileInfo::fileName() const {
 	return path_file.right(path_file.length() - path_file.lastIndexOf("/") - 1);
 }
 
+QString QMultiFileInfo::absoluteFilePath() const {
+    if (path_archive.isEmpty()) {
+        return QFileInfo(path_file).absoluteFilePath();
+    } else {
+        return QFileInfo(path_wildcardArchive).absoluteFilePath() + "/" + path_file;
+    }
+}
+QString QMultiFileInfo::absolutePath() const {
+    QString path = absoluteFilePath();
+    // if path not exist return empty string
+    if (!path.contains("/")) {
+        return "";
+    } else {
+        return path.left(path.lastIndexOf("/"));
+    }
+}
+
 QString QMultiFileInfo::filePath() const {
 	if (path_archive.isEmpty()) {
 		return path_file;
@@ -163,9 +180,11 @@ bool QMultiFileInfo::isInArchive() const {
 }
 
 bool QMultiFileInfo::exist() const {
-	return fileExist;
+    return fileExist;
 }
-
+bool QMultiFileInfo::exists() const {
+    return fileExist;
+}
 
 bool QMultiFileInfo::checkIfArchive(QString path) {
 	QStringList pathList = getArchivePath(path);

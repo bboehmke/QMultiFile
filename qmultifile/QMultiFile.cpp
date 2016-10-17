@@ -86,7 +86,7 @@ QString QMultiFile::getVersionInfo() {
 						.arg((quint8)((CFG::VERSION>>8)  & 0xFF))
 						.arg((quint8)((CFG::VERSION   )  & 0xFF));
 
-	return QString("QMultiFile Library - Version: %1 - Build: "__DATE__" "__TIME__).arg(version);
+	return QString("QMultiFile Library - Version: %1 - Build: " __DATE__ " " __TIME__).arg(version);
 }
 
 qint64 QMultiFile::readData(char* data, qint64 maxSize) {

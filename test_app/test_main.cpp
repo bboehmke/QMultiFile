@@ -56,12 +56,15 @@ int main() {
 		qDebug() << " archivePath()         -> " << info.archivePath();
 		qDebug() << " inArchivePath()       -> " << info.inArchivePath();
 		qDebug() << " path()                -> " << info.path();
+		qDebug() << " absoluteFilePath()    -> " << info.absoluteFilePath();
+		qDebug() << " absolutePath()        -> " << info.absolutePath();
 		qDebug() << " wildcardFilePath()    -> " << info.wildcardFilePath();
 		qDebug() << " wildcardPath()        -> " << info.wildcardPath();
 		qDebug() << " wildcardArchivePath() -> " << info.wildcardArchivePath();
 		qDebug() << " getArchiveExtension() -> " << info.getArchiveExtension();
 		qDebug() << " isInArchive()         -> " << info.isInArchive();
 		qDebug() << " exist()               -> " << info.exist();
+		qDebug() << " exists()              -> " << info.exists();
 
 		qDebug() << "";
 

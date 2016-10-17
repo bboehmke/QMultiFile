@@ -46,6 +46,18 @@ class QMultiFileInfo {
 		 */
 		QString fileName() const;
 
+        /**
+         * @brief Returns the absolute path to the file
+         * @return Path to file
+         */
+        QString absoluteFilePath() const;
+
+        /**
+         * @brief Returns the absolute path to the folder of the file
+         * @return Path to file
+         */
+        QString absolutePath() const;
+
 		/**
 		 * @brief Returns the path to the file (which may be absolute or relative)
 		 * @return Path to file
@@ -99,10 +111,17 @@ class QMultiFileInfo {
 		bool isInArchive() const;
 
 		/**
-		 * @brief Check if the file exist
-		 * @return True if the file exist
+		 * @brief Check if the file exists
+		 * @deprecated Use exists() instead
+		 * @return True if the file exists
 		 */
 		bool exist() const;
+
+        /**
+         * @brief Check if the file exists
+         * @return True if the file exists
+         */
+        bool exists() const;
 
 	private:
 		/**
