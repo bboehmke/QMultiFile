@@ -39,6 +39,7 @@ int main() {
 	files << "testFiles/tst_[1-2].zip/dir2/df.txt";
 	files << "testFiles/tst_[1-20].zip/dir2/df.txt";
 	files << "testFiles/test.ext/test.zip/dir2/df.txt";
+    files << "testFiles/test.zip/dir2/../dir2/df.txt";
 
 	QStringListIterator fileIt(files);
 

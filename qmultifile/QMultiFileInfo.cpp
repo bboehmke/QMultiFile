@@ -27,8 +27,7 @@ QMultiFileInfo::QMultiFileInfo() : fileExist(false) {
 
 }
 QMultiFileInfo::QMultiFileInfo(QString file) : fileExist(false) {
-	// replace \ with /
-	file.replace("\\", "/");
+	file = normalizeFilePath(file);
 
 	// prepare the req exp
 	QRegExp rx("([^\\.]*)(\\.)([^\\/]*)(\\/)");
@@ -254,4 +253,40 @@ QStringList QMultiFileInfo::getArchivePath(QString path) {
 	} else {
 		return QStringList();
 	}
+}
+
+
+QString QMultiFileInfo::normalizeFilePath(QString path) {
+	// replace \ with /
+	path.replace("\\", "/");
+
+	// prepare new path
+	int counter = 0;
+	QStringList newPath;
+
+	// iterate string from back to front
+	QStringListIterator it(path.split("/"));
+	it.toBack();
+	while (it.hasPrevious()) {
+		QString part = it.previous();
+
+		if (part == "..") {
+			++counter;
+		} else {
+			if (counter > 0) {
+				--counter;
+			} else {
+				newPath.insert(0, part);
+			}
+		}
+	}
+
+	// add leading ".."
+	while (counter > 0) {
+		newPath.insert(0, "..");
+		--counter;
+	}
+
+	// join path
+	return newPath.join("/");
 }

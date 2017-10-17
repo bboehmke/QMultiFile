@@ -157,6 +157,13 @@ class QMultiFileInfo {
 		 * @brief Get all archives of the given path (handle wildcards)
 		 */
 		QStringList getArchivePath(QString path);
+
+        /**
+         * @brief Cleanup path to file
+         * @param path Path to file
+         * @return Normalized path
+         */
+        QString normalizeFilePath(QString path);
 };
 
 #endif /* QMULTIFILEINFO_H_ */
