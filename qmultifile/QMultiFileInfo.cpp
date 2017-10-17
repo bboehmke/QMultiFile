@@ -42,7 +42,7 @@ QMultiFileInfo::QMultiFileInfo(QString file) : fileExist(false) {
 		// check if there is an archive
 		if (checkIfArchive(path_wildcardArchive)) {
 			// set extension
-			archiveExtension = rx.cap(3);
+			archiveExtension = rx.cap(3).toLower();
 			// set the file path
 			path_file = file.mid(pos + rx.matchedLength());
 			// build the wildcard paths
@@ -58,7 +58,7 @@ QMultiFileInfo::QMultiFileInfo(QString file) : fileExist(false) {
 				// if the file not exist try to remove dummy "."
 				while (!fileExist && archiveExtension.contains(".")) {
 					// remove content before dummy "."
-					archiveExtension = archiveExtension.mid(archiveExtension.indexOf(".")+1);
+					archiveExtension = archiveExtension.mid(archiveExtension.indexOf(".")+1).toLower();
 					fileExist = QMultiFile(*this).exist();
 				}
 
