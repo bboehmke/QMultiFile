@@ -270,6 +270,11 @@ QString QMultiFileInfo::normalizeFilePath(QString path) {
 	while (it.hasPrevious()) {
 		QString part = it.previous();
 
+		// remove single "."
+		if (part == ".") {
+			continue;
+		}
+
 		if (part == "..") {
 			++counter;
 		} else {
