@@ -13,6 +13,11 @@ endif ()
 # add additional find modules
 set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake")
 
+# enable qt file handling
+set(CMAKE_AUTOMOC ON)
+
 # set sub projects
 add_subdirectory(qmultifile)
+
+enable_testing()
 add_subdirectory(test_app)

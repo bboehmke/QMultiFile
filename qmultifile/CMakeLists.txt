@@ -6,9 +6,6 @@ find_package(Qt4 REQUIRED)
 find_package(ZLIB REQUIRED)
 find_package(QuaZip REQUIRED)
 
-# enable qt file handling
-set(CMAKE_AUTOMOC ON)
-
 # set source files
 file(GLOB_RECURSE SRC_CPP "*.cpp")
 

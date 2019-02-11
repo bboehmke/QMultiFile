@@ -20,6 +20,7 @@ include_directories(
 # set libraries
 target_link_libraries(${PROJECT_NAME}
     Qt4::QtCore
+    Qt4::QtTest
 
     QMultiFile
 )
@@ -31,3 +32,4 @@ set_target_properties(${PROJECT_NAME}
     LIBRARY_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
     RUNTIME_OUTPUT_DIRECTORY "${CMAKE_BINARY_DIR}/bin"
 )
+add_test(${PROJECT_NAME} ${PROJECT_NAME})
